@@ -1,0 +1,48 @@
+.site-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 0 var(--page-inset);
+  font-family: var(--font-nav);
+  font-size: var(--nav-size);
+  font-weight: 400;
+  letter-spacing: 0.005em;
+  text-transform: lowercase;
+  color: var(--ink);
+}
+
+.site-nav--overlay {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  pointer-events: none;
+  animation: fade-in 0.7s ease 0.05s both;
+}
+
+.site-nav--overlay .site-nav__link {
+  pointer-events: auto;
+}
+
+.site-nav__link {
+  padding: 0.25rem 0;
+  transition: opacity 0.2s ease;
+}
+
+.site-nav__link:hover {
+  opacity: 0.55;
+}
+
+.site-nav__link.is-active {
+  opacity: 1;
+}
+
+@media (max-width: 720px) {
+  .site-nav {
+    font-size: 0.75rem;
+    padding: 0 0.85rem;
+  }
+}

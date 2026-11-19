@@ -1,0 +1,219 @@
+.landing {
+  min-height: 100%;
+  min-height: 100dvh;
+  display: grid;
+  place-items: center;
+  background: #ffffff;
+  animation: fade-in 0.55s ease both;
+}
+
+.landing__stage {
+  position: relative;
+  width: 100%;
+  min-height: 100%;
+  min-height: 100dvh;
+  display: grid;
+  place-items: center;
+}
+
+.landing__hero {
+  width: min(65.2vw, 920px);
+  height: auto;
+  aspect-ratio: 668 / 456;
+  object-fit: cover;
+  z-index: 1;
+  transition:
+    opacity 0.75s cubic-bezier(0.22, 1, 0.36, 1),
+    filter 0.75s ease,
+    transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+  animation: image-settle 1s cubic-bezier(0.22, 1, 0.36, 1) both;
+  user-select: none;
+}
+
+.landing:has(.landing__link--work:hover) .landing__hero,
+.landing:has(.landing__link--work:focus-visible) .landing__hero,
+.landing:has(.work-preview:hover) .landing__hero,
+.landing:has(.landing__hover-bridge:hover) .landing__hero {
+  opacity: 0.16;
+  filter: grayscale(1) brightness(1.4) contrast(0.88);
+  transform: scale(1.015);
+}
+
+.landing__nav {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  z-index: 5;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 clamp(0.75rem, 3.2vw, 2.75rem);
+  transform: translateY(-50%);
+  font-family: var(--font-nav);
+  font-size: var(--nav-size);
+  font-weight: 400;
+  letter-spacing: 0.005em;
+  text-transform: lowercase;
+  color: var(--ink);
+  animation: fade-in 0.7s ease 0.05s both;
+}
+
+.landing__link {
+  position: relative;
+  z-index: 1;
+  padding: 0.45rem 0.15rem;
+  transition:
+    opacity 0.2s ease,
+    color 0.45s ease,
+    text-shadow 0.45s ease;
+}
+
+/* work / archive sit on the dark still — force contrast */
+.landing__link--on-photo {
+  color: #ffffff;
+  font-weight: 500;
+  -webkit-text-stroke: 0.35px rgba(0, 0, 0, 0.25);
+  text-shadow:
+    0 0 2px rgba(0, 0, 0, 0.85),
+    0 1px 3px rgba(0, 0, 0, 0.75),
+    0 0 14px rgba(0, 0, 0, 0.55);
+}
+
+/* When the hero washes out for the work preview, flip back to black type */
+.landing:has(.landing__link--work:hover) .landing__link--on-photo,
+.landing:has(.landing__link--work:focus-visible) .landing__link--on-photo,
+.landing:has(.work-preview:hover) .landing__link--on-photo,
+.landing:has(.landing__hover-bridge:hover) .landing__link--on-photo {
+  color: #000000;
+  font-weight: 400;
+  -webkit-text-stroke: 0;
+  text-shadow: none;
+}
+
+.landing__link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0.08rem;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.landing__link:hover::after,
+.landing__link:focus-visible::after {
+  transform: scaleX(1);
+}
+
+.landing:has(.landing__link--work:hover) .landing__link--work::after,
+.landing:has(.landing__link--work:focus-visible) .landing__link--work::after,
+.landing:has(.work-preview:hover) .landing__link--work::after,
+.landing:has(.landing__hover-bridge:hover) .landing__link--work::after {
+  transform: scaleX(1);
+}
+
+.landing__signature {
+  position: absolute;
+  z-index: 2;
+  right: max(1.5rem, calc(50% - min(65.2vw, 920px) / 2 - 0.1em));
+  bottom: max(
+    1.25rem,
+    calc(50% - min(65.2vw, 920px) * 456 / 668 / 2 - 0.15em)
+  );
+  margin: 0;
+  font-family: var(--font-signature);
+  font-size: var(--signature-size);
+  line-height: 0.85;
+  color: var(--ink);
+  pointer-events: none;
+  user-select: none;
+  transition: opacity 0.55s ease;
+  animation: signature-in 0.75s ease 0.2s both;
+}
+
+.landing:has(.landing__link--work:hover) .landing__signature,
+.landing:has(.landing__link--work:focus-visible) .landing__signature,
+.landing:has(.work-preview:hover) .landing__signature,
+.landing:has(.landing__hover-bridge:hover) .landing__signature {
+  opacity: 0.4;
+}
+
+/* Click "work" — hero scrolls away, nav rises into header position */
+.landing--to-work .landing__hero {
+  opacity: 0;
+  filter: blur(10px);
+  transform: translate3d(0, 42vh, 0) scale(1.04);
+  transition:
+    opacity 0.7s cubic-bezier(0.55, 0, 0.7, 0.3),
+    filter 0.7s ease,
+    transform 0.85s cubic-bezier(0.55, 0, 0.7, 0.3);
+}
+
+.landing--to-work .landing__signature {
+  opacity: 0;
+  transform: translate3d(0, 24px, 0);
+  transition:
+    opacity 0.45s ease,
+    transform 0.55s ease;
+}
+
+.landing--to-work .landing__nav {
+  top: clamp(1.1rem, 2.4vh, 1.75rem);
+  transform: translateY(0);
+  transition:
+    top 0.85s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.85s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.landing--to-work .landing__link--on-photo {
+  color: #000000;
+  font-weight: 400;
+  -webkit-text-stroke: 0;
+  text-shadow: none;
+}
+
+.landing--to-work .work-preview,
+.landing--to-work .landing__hover-bridge {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+
+/* Keeps the hover alive while the cursor travels up to the strip */
+.landing__hover-bridge {
+  position: absolute;
+  left: 50%;
+  top: 26%;
+  z-index: 4;
+  width: min(92vw, 1100px);
+  height: 24%;
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+.landing:has(.landing__link--work:hover) .landing__hover-bridge,
+.landing:has(.landing__link--work:focus-visible) .landing__hover-bridge,
+.landing:has(.work-preview:hover) .landing__hover-bridge {
+  pointer-events: auto;
+}
+
+@media (max-width: 720px) {
+  .landing__hero {
+    width: min(88vw, 920px);
+  }
+
+  .landing__nav {
+    font-size: 0.75rem;
+    padding: 0 0.85rem;
+  }
+
+  .landing__signature {
+    right: 1rem;
+    bottom: 1.25rem;
+    font-size: clamp(1.9rem, 9vw, 2.6rem);
+  }
+}

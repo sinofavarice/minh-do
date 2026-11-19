@@ -1,0 +1,40 @@
+.placeholder {
+  min-height: 100%;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg);
+  animation: fade-in 0.5s ease both;
+}
+
+.placeholder__header {
+  padding-top: clamp(1.25rem, 3vh, 2rem);
+}
+
+.placeholder__body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  padding: var(--page-inset);
+  padding-top: clamp(4rem, 10vh, 6rem);
+  text-align: center;
+}
+
+.placeholder__brand {
+  margin: 0;
+  font-family: var(--font-signature);
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  line-height: 1;
+}
+
+.placeholder__title {
+  margin: 0;
+  font-family: var(--font-nav);
+  font-size: var(--nav-size);
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  text-transform: lowercase;
+}
